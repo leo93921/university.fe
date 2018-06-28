@@ -6,7 +6,8 @@
     <label for="password" class="sr-only"></label>
     <input type="password" id="password" name="password" class="form-control" placeholder="Password" required [(ngModel)]="userCredentials.password">
     <button class="btn btn-lg btn-block btn-primary mt-3" type="submit">Sign in</button>
+    <p *ngIf="showError" class="text-danger mt-3">Email o password errata, riprova.</p>
     <hr>
-    <a href="#" class="text-danger">Forgot your password? Reset it here.</a>
+    <a href="#" class="text-dark">Forgot your password? Reset it here.</a>
   </form>
 </div>
