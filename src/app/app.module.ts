@@ -9,12 +9,14 @@ import { LoginComponent } from './components/login/login.component';
 import { SecretariatHomeComponent } from './components/secretariat/secretariat-home/secretariat-home.component';
 import { CourseOfStudyComponent } from './components/secretariat/course-of-study/course-of-study.component';
 import { TeachingAssignmentComponent } from './components/secretariat/teaching-assignment/teaching-assignment.component';
+import { SecretariatPanelComponent } from './components/secretariat/secretariat-panel/secretariat-panel.component';
 
 const appRoutes: Routes = [
   { path: 'secretariat', component: SecretariatHomeComponent, children: [
-    { path: '', redirectTo: 'course-of-study', pathMatch: 'full' },
+    { path: '', component: SecretariatPanelComponent },
     { path: 'course-of-study', component: CourseOfStudyComponent },
-    { path: 'subjects', component: TeachingAssignmentComponent }
+    { path: 'subjects', component: TeachingAssignmentComponent },
+    { path: '**', component: SecretariatPanelComponent}
   ]},
   { path: '**', component: LoginComponent }
 ];
@@ -25,7 +27,8 @@ const appRoutes: Routes = [
     LoginComponent,
     SecretariatHomeComponent,
     CourseOfStudyComponent,
-    TeachingAssignmentComponent
+    TeachingAssignmentComponent,
+    SecretariatPanelComponent
   ],
   imports: [
     BrowserModule,

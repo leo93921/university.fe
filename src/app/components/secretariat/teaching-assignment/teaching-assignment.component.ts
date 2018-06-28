@@ -4,7 +4,7 @@ import { CourseOfStudyService } from '../../../services/course-of-study.service'
 import { SubjectService } from '../../../services/subject.service';
 import { Subject } from '../../../models/subject';
 import { SecretariatService } from '../../../services/secretariat.service';
-import { Observable, forkJoin } from 'rxjs';
+import { forkJoin } from 'rxjs';
 import { UserService } from '../../../services/user.service';
 import { User } from '../../../models/User';
 
