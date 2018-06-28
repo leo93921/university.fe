@@ -1,13 +1,15 @@
-<div class="text-center mt-5">
-  <form novalidate class="form-signin mx-auto" #ngForm (ngSubmit)="formSubmitted()">
-    <h1 class="h3 mb-3 font-weight-normal">Please, sign in</h1>
-    <label for="username" class="sr-only"></label>
-    <input type="text" id="username" name="username" class="form-control" placeholder="Username" required [(ngModel)]="userCredentials.username">
-    <label for="password" class="sr-only"></label>
-    <input type="password" id="password" name="password" class="form-control" placeholder="Password" required [(ngModel)]="userCredentials.password">
-    <button class="btn btn-lg btn-block btn-primary mt-3" type="submit">Sign in</button>
-    <p *ngIf="showError" class="text-danger mt-3">Email o password errata, riprova.</p>
-    <hr>
-    <a href="#" class="text-dark">Forgot your password? Reset it here.</a>
-  </form>
+<div class="container">
+  <div class="text-center mt-5">
+    <form novalidate class="form-signin mx-auto" #ngForm (ngSubmit)="formSubmitted()">
+      <h1 class="h3 mb-3 font-weight-normal">Please, sign in</h1>
+      <label for="username" class="sr-only"></label>
+      <input type="text" id="username" name="username" class="form-control" placeholder="Username" required [(ngModel)]="userCredentials.username">
+      <label for="password" class="sr-only"></label>
+      <input type="password" id="password" name="password" class="form-control" placeholder="Password" required [(ngModel)]="userCredentials.password">
+      <button class="btn btn-lg btn-block btn-primary mt-3" type="submit">Sign in</button>
+      <p *ngIf="showError" class="text-danger mt-3">Email o password errata, riprova.</p>
+      <hr>
+      <a href="#" class="text-dark">Forgot your password? Reset it here.</a>
+    </form>
+  </div>
 </div>

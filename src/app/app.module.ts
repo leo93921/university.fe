@@ -6,10 +6,14 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
-import { HomeComponent } from './components/home/home.component';
+import { SecretariatHomeComponent } from './components/secretariat/secretariat-home/secretariat-home.component';
+import { CourseOfStudyComponent } from './components/secretariat/course-of-study/course-of-study.component';
 
 const appRoutes: Routes = [
-  { path: 'home', component: HomeComponent },
+  { path: 'secretariat', component: SecretariatHomeComponent, children: [
+    { path: '', redirectTo: 'course-of-study', pathMatch: 'full' },
+    { path: 'course-of-study', component: CourseOfStudyComponent }
+  ]},
   { path: '**', component: LoginComponent }
 ];
 
@@ -17,7 +21,8 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent
+    SecretariatHomeComponent,
+    CourseOfStudyComponent
   ],
   imports: [
     BrowserModule,

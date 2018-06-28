@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.localStorage.getItem('loggedUser').subscribe(user => {
-      if (user) {
+      if (user && user.userType === 'SECRETARIAT') {
         this.goToHome();
       }
     });
@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
   }
 
   goToHome(): void {
-    this.router.navigateByUrl('home');
+    this.router.navigateByUrl('secretariat');
   }
 
 }
