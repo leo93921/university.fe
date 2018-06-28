@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+import { environment } from '../../environments/environment';
+
 import { UserCredentials } from '../models/UserCredentials';
 import { User } from '../models/User';
 
@@ -11,7 +13,7 @@ import { User } from '../models/User';
 })
 export class UserService {
 
-  private END_POINT = 'http://localhost:8080/university.be/user';
+  private END_POINT = `${environment.BASE_URL}/user`;
 
   constructor(private http: HttpClient) { }
 
