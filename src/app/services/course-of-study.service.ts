@@ -17,4 +17,9 @@ export class CourseOfStudyService {
   save(courseOfStudy: CourseOfStudy): Observable<CourseOfStudy> {
     return this.http.post<CourseOfStudy>(`${this.END_POINT}`, courseOfStudy);
   }
+
+  getAll(): Observable<CourseOfStudy[]> {
+    return this.http.get<CourseOfStudy[]>(`${this.END_POINT}`);
+  }
+
 }

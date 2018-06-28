@@ -9,7 +9,7 @@ import { SecretariatService } from '../../../services/secretariat.service';
   selector: 'app-course-of-study',
   templateUrl: './course-of-study.component.html',
   styleUrls: ['./course-of-study.component.css'],
-  providers: [ AcademicYearService, CourseOfStudyService ]
+  providers: [ AcademicYearService ]
 })
 export class CourseOfStudyComponent implements OnInit {
 

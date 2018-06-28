@@ -20,4 +20,8 @@ export class UserService {
   public checkCredentials(credentials: UserCredentials): Observable<User> {
     return this.http.post<User>(`${this.END_POINT}/login`, credentials);
   }
+
+  public getAllProfessors(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.END_POINT}/all-professors`);
+  }
 }
