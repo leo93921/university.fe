@@ -33,4 +33,12 @@ export class SecretariatService {
     };
     this.alertToBeShown = true;
   }
+
+  showDanger(message: string): void {
+    this.alert = {
+      type: 'danger',
+      message
+    };
+    this.alertToBeShown = true;
+  }
 }

@@ -11,6 +11,7 @@ import { CourseOfStudyComponent } from './components/secretariat/course-of-study
 import { TeachingAssignmentComponent } from './components/secretariat/teaching-assignment/teaching-assignment.component';
 import { SecretariatPanelComponent } from './components/secretariat/secretariat-panel/secretariat-panel.component';
 import { ProfessorsComponent } from './components/secretariat/professors/professors.component';
+import { ClassroomsComponent } from './components/secretariat/classrooms/classrooms.component';
 
 const appRoutes: Routes = [
   { path: 'secretariat', component: SecretariatHomeComponent, children: [
@@ -18,6 +19,7 @@ const appRoutes: Routes = [
     { path: 'course-of-study', component: CourseOfStudyComponent },
     { path: 'subjects', component: TeachingAssignmentComponent },
     { path: 'professors', component: ProfessorsComponent },
+    { path: 'classrooms', component: ClassroomsComponent },
     { path: '**', component: SecretariatPanelComponent}
   ]},
   { path: '**', component: LoginComponent }
@@ -31,7 +33,8 @@ const appRoutes: Routes = [
     CourseOfStudyComponent,
     TeachingAssignmentComponent,
     SecretariatPanelComponent,
-    ProfessorsComponent
+    ProfessorsComponent,
+    ClassroomsComponent
   ],
   imports: [
     BrowserModule,
