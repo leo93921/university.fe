@@ -1,0 +1,97 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb mt-3">
+    <li class="breadcrumb-item" aria-current="page">
+      <a class="text-dark" [routerLink]="['/secretariat']">Home</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Add a professor</li>
+  </ol>
+</nav>
+
+<div class="row mt-3">
+  <div class="col">
+    <h1>Add a new professor</h1>
+    <p>Here you can create a new Professor. After the addition, the professor you create can access to the system.</p>
+  </div>
+</div>
+
+<div class="row mt-3">
+  <div class="col">
+    <p>The following are the professors already created.</p>
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let prof of profList">
+            <th scope="row">{{ prof.name }} {{ prof.surname }}</th>
+            <td>{{ prof.email }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+      Add a professor
+    </button>
+  </div>
+</div>
+
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h4 class="modal-title">Add a new professor</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <form novalidate #form="ngForm">
+          <div class="form-group">
+            <div class="row">
+              <div class="col-12 col-md-6">
+                <div class="form-group">
+                  <label for="name">Name</label>
+                  <input type="text" class="form-control" id="name" name="name" placeholder="Name" [(ngModel)]="prof.name"
+                    required>
+                </div>
+              </div>
+              <div class="col-12 col-md-6">
+                <div class="form-group">
+                  <label for="surname">Surname</label>
+                  <input type="text" class="form-control" id="surname" name="surname" placeholder="Surname" [(ngModel)]="prof.surname"
+                    required>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <div class="form-group">
+                      <label for="email">Email</label>
+                      <input type="email" class="form-control" id="email" name="email" placeholder="Email" [(ngModel)]="prof.email"
+                        required>
+                    </div>
+                  </div>
+                  <div class="col-12 col-md-6">
+                    <div class="form-group">
+                      <label for="password">Password</label>
+                      <input type="password" class="form-control" id="password" name="password" placeholder="Password" [(ngModel)]="prof.password"
+                        required>
+                    </div>
+                  </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button [disabled]="form.invalid" type="button" class="btn btn-primary" data-dismiss="modal" (click)="saveProfessor()">Save</button>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  BASE_URL: 'http://localhost:8080/university.be'
+  BASE_URL: 'http://localhost:8080/university.be',
+  PROFESSOR_TYPE: 'PROFESSOR'
 };
 
 /*

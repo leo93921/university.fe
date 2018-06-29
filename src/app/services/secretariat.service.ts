@@ -25,4 +25,12 @@ export class SecretariatService {
     };
     this.alertToBeShown = false;
   }
+
+  showSuccess(message: string): void {
+    this.alert = {
+      type: 'success',
+      message
+    };
+    this.alertToBeShown = true;
+  }
 }

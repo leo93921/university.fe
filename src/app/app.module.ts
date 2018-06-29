@@ -10,12 +10,14 @@ import { SecretariatHomeComponent } from './components/secretariat/secretariat-h
 import { CourseOfStudyComponent } from './components/secretariat/course-of-study/course-of-study.component';
 import { TeachingAssignmentComponent } from './components/secretariat/teaching-assignment/teaching-assignment.component';
 import { SecretariatPanelComponent } from './components/secretariat/secretariat-panel/secretariat-panel.component';
+import { ProfessorsComponent } from './components/secretariat/professors/professors.component';
 
 const appRoutes: Routes = [
   { path: 'secretariat', component: SecretariatHomeComponent, children: [
     { path: '', component: SecretariatPanelComponent },
     { path: 'course-of-study', component: CourseOfStudyComponent },
     { path: 'subjects', component: TeachingAssignmentComponent },
+    { path: 'professors', component: ProfessorsComponent },
     { path: '**', component: SecretariatPanelComponent}
   ]},
   { path: '**', component: LoginComponent }
@@ -28,7 +30,8 @@ const appRoutes: Routes = [
     SecretariatHomeComponent,
     CourseOfStudyComponent,
     TeachingAssignmentComponent,
-    SecretariatPanelComponent
+    SecretariatPanelComponent,
+    ProfessorsComponent
   ],
   imports: [
     BrowserModule,
