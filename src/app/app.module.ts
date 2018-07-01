@@ -4,6 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { SecretariatHomeComponent } from './components/secretariat/secretariat-home/secretariat-home.component';
@@ -12,6 +14,7 @@ import { TeachingAssignmentComponent } from './components/secretariat/teaching-a
 import { SecretariatPanelComponent } from './components/secretariat/secretariat-panel/secretariat-panel.component';
 import { ProfessorsComponent } from './components/secretariat/professors/professors.component';
 import { ClassroomsComponent } from './components/secretariat/classrooms/classrooms.component';
+import { LessonsManagementComponent } from './components/secretariat/lessons-management/lessons-management.component';
 
 const appRoutes: Routes = [
   { path: 'secretariat', component: SecretariatHomeComponent, children: [
@@ -20,6 +23,7 @@ const appRoutes: Routes = [
     { path: 'subjects', component: TeachingAssignmentComponent },
     { path: 'professors', component: ProfessorsComponent },
     { path: 'classrooms', component: ClassroomsComponent },
+    { path: 'lessons', component: LessonsManagementComponent },
     { path: '**', component: SecretariatPanelComponent}
   ]},
   { path: '**', component: LoginComponent }
@@ -34,13 +38,15 @@ const appRoutes: Routes = [
     TeachingAssignmentComponent,
     SecretariatPanelComponent,
     ProfessorsComponent,
-    ClassroomsComponent
+    ClassroomsComponent,
+    LessonsManagementComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
-    FormsModule
+    FormsModule,
+    NgbModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

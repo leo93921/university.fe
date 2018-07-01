@@ -1,0 +1,112 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb mt-3">
+    <li class="breadcrumb-item" aria-current="page">
+      <a class="text-dark" [routerLink]="['/secretariat']">Home</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Add a lesson</li>
+  </ol>
+</nav>
+
+<div class="row mt-3">
+  <div class="col">
+    <h1>Add a new lesson</h1>
+    <p>Here you can add a new Lesson.</p>
+  </div>
+</div>
+
+
+<form novalidate #form="ngForm" (ngSubmit)="saveLesson()">
+  <div class="form-group">
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <div class="form-group">
+          <label for="course">Course of study *</label>
+          <select class="form-control" name="course" id="course" (change)="selectCourseOfStudy(+$event.target.value)">
+            <option [value]="null" disabled>Select a course of study</option>
+            <option *ngFor="let c of coursesOfStudy" [value]="c.id">{{ c.name }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="form-group">
+          <label for="course">Subject *</label>
+          <select class="form-control" name="subject" id="subject" [(ngModel)]="selectedSubjectID" required>
+            <option [value]="null" disabled>Select a subject</option>
+            <option *ngFor="let s of subjectList" [value]="s.id">{{ s.name }}</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <div class="form-group">
+              <label for="classroom">Classroom *</label>
+              <select class="form-control" name="classroom" id="classroom" [(ngModel)]="classroomID" required>
+                <option [value]="null" disabled>Select a classroom</option>
+                <option *ngFor="let c of classList" [value]="c.id">{{ c.name }}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-12 col-md-6">
+              <div class="form-group">
+                <label for="day">Day of the week *</label>
+                <select class="form-control" name="day" id="day" [(ngModel)]="day" required>
+                  <option [value]="null" disabled>Select a day</option>
+                  <option *ngFor="let day of ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']" [value]="day">{{ day }}</option>
+                </select>
+              </div>
+            </div>
+    </div>
+    <div class="row">
+      <div class="col-6 col-md-3">
+        <div class="form-group">
+          <label for="startTime">Start time *</label>
+          <ngb-timepicker required [(ngModel)]="startTime" name="startTime" [spinners]="false"></ngb-timepicker>          
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="form-group">
+          <label for="startDate">Start date *</label>
+          <div class="input-group">
+              <input class="form-control" placeholder="yyyy-mm-dd" required
+                     name="startDate" [(ngModel)]="startDate" ngbDatepicker #startDatePicker="ngbDatepicker" placement="top-right">
+              <div class="input-group-append">
+                <button class="btn btn-outline-secondary" (click)="startDatePicker.toggle()" type="button">
+                    <i class="fas fa-calendar-alt"></i>
+                </button>
+              </div>
+            </div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="form-group">
+          <label for="endTime">End time *</label>
+          <ngb-timepicker required [(ngModel)]="endTime" name="endTime" [spinners]="false"></ngb-timepicker>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+          <div class="form-group">
+            <label for="endTime">End date *</label>
+            <div class="input-group">
+                <input class="form-control" placeholder="yyyy-mm-dd" required
+                       name="endDate" [(ngModel)]="endDate" ngbDatepicker #endDatePicker="ngbDatepicker" placement="top-right" >
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" (click)="endDatePicker.toggle()" type="button">
+                      <i class="fas fa-calendar-alt"></i>
+                  </button>
+                </div>
+              </div>
+          </div>
+        </div>
+    </div>
+  </div>
+  
+  <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+    Add a lesson
+  </button>
+</form>
+
+
+
+
+
