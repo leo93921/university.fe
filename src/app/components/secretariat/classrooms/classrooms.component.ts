@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Classroom } from '../../../models/classroom';
 import { ClassroomService } from '../../../services/classroom.service';
 import { SecretariatService } from '../../../services/secretariat.service';
+import { SupportDevice } from '../../../models/support-device';
 
 @Component({
   selector: 'app-classrooms',
@@ -21,6 +22,7 @@ export class ClassroomsComponent implements OnInit {
 
   ngOnInit() {
     this.updateList();
+    this.initModel();
   }
 
   updateList() {
@@ -32,10 +34,22 @@ export class ClassroomsComponent implements OnInit {
   saveClassroom() {
     this.classroomService.saveClassroom(this.model).subscribe(saved => {
       this.classroomList.push(saved);
-      this.model = {} as Classroom;
+      this.initModel();
     }, error => {
       this.secretariatService.showDanger('Something went wrong. Try again later.');
     });
   }
 
+  initModel() {
+    this.model = {} as Classroom;
+    this.model.supportDevices = [];
+  }
+
+  addSupportDeviceToModel() {
+    this.model.supportDevices.push({} as SupportDevice);
+  }
+
+  removeSupportDevice(index: number) {
+    this.model.supportDevices.splice(index, 1);
+  }
 }
