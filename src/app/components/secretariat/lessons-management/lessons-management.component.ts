@@ -53,13 +53,10 @@ export class LessonsManagementComponent implements OnInit {
   subjectList: Subject[] = [];
   coursesOfStudy: CourseOfStudy[] = [];
 
-  /*
-  timeSlot: TimeSlot;*/
-
   constructor(
     private classroomService: ClassroomService,
     private subjectService: SubjectService,
-    private courseOfStudy: CourseOfStudyService,
+    private courseOfStudyService: CourseOfStudyService,
     private secretariatService: SecretariatService,
     private lessonService: LessonService,
     private router: Router
@@ -68,7 +65,7 @@ export class LessonsManagementComponent implements OnInit {
   ngOnInit() {
     forkJoin(
       this.classroomService.getAll(),
-      this.courseOfStudy.getAll()
+      this.courseOfStudyService.getAll()
     ).subscribe( res => {
       this.classList = res[0];
       this.coursesOfStudy = res[1];

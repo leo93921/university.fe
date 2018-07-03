@@ -21,4 +21,8 @@ export class ClassroomService {
   public saveClassroom(classroom: Classroom): Observable<Classroom> {
     return this.http.post<Classroom>(this.END_POINT, classroom);
   }
+
+  public get(classroomID: number): Observable<Classroom> {
+    return this.http.get<Classroom>(`${this.END_POINT}/${classroomID}`);
+  }
 }
