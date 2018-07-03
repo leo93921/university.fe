@@ -8,7 +8,7 @@ import { SubjectService } from '../../../services/subject.service';
 import { ClassroomService } from '../../../services/classroom.service';
 import { CourseOfStudyService } from '../../../services/course-of-study.service';
 import { CourseOfStudy } from '../../../models/course-of-study';
-import { SecretariatService } from '../../../services/secretariat.service';
+import { MessageService } from '../../../services/message.service';
 import { TimeSlot } from '../../../models/time-slot';
 import { LessonService } from '../../../services/lesson.service';
 
@@ -57,7 +57,7 @@ export class LessonsManagementComponent implements OnInit {
     private classroomService: ClassroomService,
     private subjectService: SubjectService,
     private courseOfStudyService: CourseOfStudyService,
-    private secretariatService: SecretariatService,
+    private messageService: MessageService,
     private lessonService: LessonService,
     private router: Router
   ) { }
@@ -70,7 +70,7 @@ export class LessonsManagementComponent implements OnInit {
       this.classList = res[0];
       this.coursesOfStudy = res[1];
     }, error => {
-      this.secretariatService.showDanger('Something went wrong. Please, try again later.');
+      this.messageService.showDanger('Something went wrong. Please, try again later.');
     });
   }
 
@@ -79,7 +79,7 @@ export class LessonsManagementComponent implements OnInit {
       this.coursesOfStudy.find(c => c.id === courseID)
     ).subscribe(
       list => this.subjectList = list,
-      error => { this.secretariatService.showDanger('Something went wrong. Please, try again later.'); }
+      error => { this.messageService.showDanger('Something went wrong. Please, try again later.'); }
     );
   }
 
@@ -98,7 +98,7 @@ export class LessonsManagementComponent implements OnInit {
 
     // print error if start > end
     if (aStartDate >= aEndDate) {
-      this.secretariatService.showDanger('Start date must be greater than the end date.');
+      this.messageService.showDanger('Start date must be greater than the end date.');
       return;
     }
     const datesToBeSaved = this.getAllTheDaysInInterval(aStartDate, aEndDate, this.day);
@@ -134,7 +134,7 @@ export class LessonsManagementComponent implements OnInit {
 
     forkJoin(observableList).subscribe(
       res => {
-        this.secretariatService.showSuccess('The lessons have been saved.');
+        this.messageService.showSuccess('The lessons have been saved.');
         this.router.navigateByUrl('/secretariat');
       });
 

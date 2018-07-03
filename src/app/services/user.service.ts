@@ -6,6 +6,8 @@ import { environment } from '../../environments/environment';
 
 import { UserCredentials } from '../models/UserCredentials';
 import { User } from '../models/User';
+import { LocalStorage } from '@ngx-pwa/local-storage';
+
 
 
 @Injectable({
@@ -15,7 +17,10 @@ export class UserService {
 
   private END_POINT = `${environment.BASE_URL}/user`;
 
-  constructor(private http: HttpClient) { }
+  constructor(
+    private http: HttpClient,
+    private localStorage: LocalStorage
+  ) { }
 
   public checkCredentials(credentials: UserCredentials): Observable<User> {
     return this.http.post<User>(`${this.END_POINT}/login`, credentials);
@@ -27,5 +32,9 @@ export class UserService {
 
   public registerUser(userWithPassword: User): Observable<User> {
     return this.http.post<User>(`${this.END_POINT}/register`, userWithPassword);
+  }
+
+  public logout(): Observable<boolean> {
+    return this.localStorage.removeItem('loggedUser');
   }
 }

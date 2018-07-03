@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Classroom } from '../../../models/classroom';
 import { ClassroomService } from '../../../services/classroom.service';
-import { SecretariatService } from '../../../services/secretariat.service';
+import { MessageService } from '../../../services/message.service';
 import { SupportDevice } from '../../../models/support-device';
 
 @Component({
@@ -17,7 +17,7 @@ export class ClassroomsComponent implements OnInit {
 
   constructor(
     private classroomService: ClassroomService,
-    private secretariatService: SecretariatService
+    private messageService: MessageService
   ) { }
 
   ngOnInit() {
@@ -27,7 +27,7 @@ export class ClassroomsComponent implements OnInit {
 
   updateList() {
     this.classroomService.getAll().subscribe(list => this.classroomList = list, error => {
-      this.secretariatService.showDanger('Something went wrong. Try again later.');
+      this.messageService.showDanger('Something went wrong. Try again later.');
     });
   }
 
@@ -36,7 +36,7 @@ export class ClassroomsComponent implements OnInit {
       this.classroomList.push(saved);
       this.initModel();
     }, error => {
-      this.secretariatService.showDanger('Something went wrong. Try again later.');
+      this.messageService.showDanger('Something went wrong. Try again later.');
     });
   }
 

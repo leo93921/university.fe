@@ -3,7 +3,7 @@ import { CourseOfStudy } from '../../../models/course-of-study';
 import { CourseOfStudyService } from '../../../services/course-of-study.service';
 import { SubjectService } from '../../../services/subject.service';
 import { Subject } from '../../../models/subject';
-import { SecretariatService } from '../../../services/secretariat.service';
+import { MessageService } from '../../../services/message.service';
 import { forkJoin } from 'rxjs';
 import { UserService } from '../../../services/user.service';
 import { User } from '../../../models/User';
@@ -28,7 +28,7 @@ export class TeachingAssignmentComponent implements OnInit {
   constructor(
     private courseOfStudyService: CourseOfStudyService,
     private subjectService: SubjectService,
-    private secretariatService: SecretariatService,
+    private messageService: MessageService,
     private userService: UserService
   ) {}
 
@@ -51,7 +51,7 @@ export class TeachingAssignmentComponent implements OnInit {
           this.subjectModel.courseOfStudy = this.selectedCourseOfStudy;
           this.showSubjectsTable = true;
         },
-        error => this.secretariatService.showAlert({
+        error => this.messageService.showAlert({
           message: 'Something went wrong. Try again later.',
           type: 'danger'
         })
@@ -68,13 +68,13 @@ export class TeachingAssignmentComponent implements OnInit {
 
   saveSubject() {
     this.subjectService.save(this.subjectModel).subscribe((model) => {
-      this.secretariatService.showAlert({
+      this.messageService.showAlert({
         message: 'The subject has been saved.',
         type: 'success'
       });
       this.updateSubjectList();
     }, error => {
-      this.secretariatService.showAlert({
+      this.messageService.showAlert({
         message: 'Something went wrong. Try again later',
         type: 'danger'
       });

@@ -15,6 +15,8 @@ import { SecretariatPanelComponent } from './components/secretariat/secretariat-
 import { ProfessorsComponent } from './components/secretariat/professors/professors.component';
 import { ClassroomsComponent } from './components/secretariat/classrooms/classrooms.component';
 import { LessonsManagementComponent } from './components/secretariat/lessons-management/lessons-management.component';
+import { ProfessorHomeComponent } from './components/professor/professor-home/professor-home.component';
+import { ProfessorPanelComponent } from './components/professor/professor-panel/professor-panel.component';
 
 const appRoutes: Routes = [
   { path: 'secretariat', component: SecretariatHomeComponent, children: [
@@ -25,6 +27,9 @@ const appRoutes: Routes = [
     { path: 'classrooms', component: ClassroomsComponent },
     { path: 'lessons', component: LessonsManagementComponent },
     { path: '**', component: SecretariatPanelComponent}
+  ]},
+  { path: 'professor', component: ProfessorHomeComponent, children: [
+    { path: '', component: ProfessorPanelComponent }
   ]},
   { path: '**', component: LoginComponent }
 ];
@@ -39,7 +44,9 @@ const appRoutes: Routes = [
     SecretariatPanelComponent,
     ProfessorsComponent,
     ClassroomsComponent,
-    LessonsManagementComponent
+    LessonsManagementComponent,
+    ProfessorHomeComponent,
+    ProfessorPanelComponent
   ],
   imports: [
     BrowserModule,

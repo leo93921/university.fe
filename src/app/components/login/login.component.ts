@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
+  loggedUser: User;
   userCredentials: UserCredentials = {
     username: '',
     password: ''
@@ -28,7 +29,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.localStorage.getItem('loggedUser').subscribe(user => {
-      if (user && user.userType === 'SECRETARIAT') {
+      if (user) {
+        this.loggedUser = user;
         this.goToHome();
       }
     });
@@ -40,6 +42,7 @@ export class LoginComponent implements OnInit {
         console.log(user);
         if (user) {
           this.localStorage.setItem('loggedUser', user).subscribe(() => {
+            this.loggedUser = user;
             this.goToHome();
           });
         }
@@ -49,7 +52,12 @@ export class LoginComponent implements OnInit {
   }
 
   goToHome(): void {
-    this.router.navigateByUrl('secretariat');
+    switch (this.loggedUser.userType) {
+      case 'SECRETARIAT':
+        this.router.navigateByUrl('secretariat'); break;
+      case 'PROFESSOR':
+        this.router.navigateByUrl('professor'); break;
+    }
   }
 
 }

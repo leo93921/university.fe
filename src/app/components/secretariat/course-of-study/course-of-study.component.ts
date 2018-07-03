@@ -3,7 +3,7 @@ import { AcademicYearService } from '../../../services/academic-year.service';
 import { AcademicYear } from '../../../models/academic-year';
 import { CourseOfStudy } from '../../../models/course-of-study';
 import { CourseOfStudyService } from '../../../services/course-of-study.service';
-import { SecretariatService } from '../../../services/secretariat.service';
+import { MessageService } from '../../../services/message.service';
 
 @Component({
   selector: 'app-course-of-study',
@@ -24,7 +24,7 @@ export class CourseOfStudyComponent implements OnInit {
   constructor(
     private academicYearService: AcademicYearService,
     private courseOfStudyService: CourseOfStudyService,
-    private secreatariatService: SecretariatService
+    private messageService: MessageService
   ) { }
 
   ngOnInit() {
@@ -45,10 +45,10 @@ export class CourseOfStudyComponent implements OnInit {
 
   saveCourse() {
     this.courseOfStudyService.save(this.model).subscribe(saved => {
-      this.secreatariatService.showAlert({type: 'success', message: 'The course of study has been saved'});
+      this.messageService.showAlert({type: 'success', message: 'The course of study has been saved'});
     },
       error => {
-        this.secreatariatService.showAlert({type: 'danger', message: 'An error occurred, please retry.'});
+        this.messageService.showAlert({type: 'danger', message: 'An error occurred, please retry.'});
       }
   );
   }

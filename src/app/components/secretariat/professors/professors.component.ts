@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../../models/User';
 import { UserService} from '../../../services/user.service';
-import { SecretariatService } from '../../../services/secretariat.service';
+import { MessageService } from '../../../services/message.service';
 import { environment } from '../../../../environments/environment';
 
 @Component({
@@ -17,7 +17,7 @@ export class ProfessorsComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private secretariatService: SecretariatService
+    private messageService: MessageService
   ) {}
 
   ngOnInit() {
@@ -29,7 +29,7 @@ export class ProfessorsComponent implements OnInit {
     this.userService.getAllProfessors().subscribe(list => {
       this.profList = list;
     }, error => {
-      this.secretariatService.showAlert({
+      this.messageService.showAlert({
         message: 'Something went wrong. Try again later',
         type: 'danger'
       });
@@ -39,10 +39,10 @@ export class ProfessorsComponent implements OnInit {
   saveProfessor() {
     this.userService.registerUser(this.prof).subscribe(user => {
       this.profList.push(user);
-      this.secretariatService.showSuccess('The professor has been saved successfully');
+      this.messageService.showSuccess('The professor has been saved successfully');
       this.initProfessor();
     }, error => {
-      this.secretariatService.showAlert({
+      this.messageService.showAlert({
         message: 'Something went wrong. Try again later',
         type: 'danger'
       });
