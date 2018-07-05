@@ -9,7 +9,6 @@ import { TimeSlot } from '../../../models/time-slot';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DocumentService } from '../../../services/document.service';
 import { Document } from '../../../models/document';
-import { MessageService } from '../../../services/message.service';
 
 @Component({
   selector: 'app-upload-document',
@@ -75,20 +74,35 @@ export class UploadDocumentComponent implements OnInit {
     formData.append('note', this.toUpload.note);
     formData.append('publishDate', (new Date()).toISOString());
     formData.append('lesson-id', this.selectedLesson.id.toString());
-    console.log(formData);
 
     this.documentService.saveDocument(formData).subscribe(document => {
       this.documents.push(document);
       this.file = null;
+      this.filename = '';
       this.toUpload = {} as Document;
       this.messageText = 'Document saved.';
       this.messageType = 'success';
       this.alertToBeShown = true;
     }, error => {
-      this.messageText = 'Something went wrong, try again later';
-      this.messageType = 'danger';
-      this.alertToBeShown = true;
+      this.showModalError();
     });
+  }
+
+  deleteDocument(ID: number, index: number) {
+    this.documentService.deleteDocument(ID).subscribe(res => {
+      this.messageText = 'Document deleted successfully.';
+      this.messageType = 'success';
+      this.alertToBeShown = true;
+      this.documents.splice(index - 1, 1);
+    }, error => {
+      this.showModalError();
+    });
+  }
+
+  showModalError() {
+    this.messageText = 'Something went wrong, try again later';
+    this.messageType = 'danger';
+    this.alertToBeShown = true;
   }
 
   initFilter(): LessonFilter {

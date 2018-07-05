@@ -23,4 +23,8 @@ export class DocumentService {
     return this.http.post<Document>(this.END_POINT, form);
   }
 
+  public deleteDocument(id: number): Observable<boolean> {
+    return this.http.delete<boolean>(`${this.END_POINT}/${id}`);
+  }
+
 }

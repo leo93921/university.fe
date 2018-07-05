@@ -72,12 +72,12 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let d of documents">
+          <tr *ngFor="let d of documents; let index = index">
             <td class="align-middle">{{ d.name }}</td>
             <td class="align-middle">{{ d.note }}</td>
             <td class="align-middle text-right">
               <button class="btn btn-link btn-sm"><i class="fas fa-download"></i></button>
-              <button class="btn btn-link btn-sm"><i class="fas fa-trash-alt"></i></button>
+              <button class="btn btn-link btn-sm" (click)="deleteDocument(d.id, index)"><i class="fas fa-trash-alt"></i></button>
             </td>
           </tr>
           <tr *ngIf="documents.length === 0">
