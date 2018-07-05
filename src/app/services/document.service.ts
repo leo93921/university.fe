@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-
+import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -25,6 +25,10 @@ export class DocumentService {
 
   public deleteDocument(id: number): Observable<boolean> {
     return this.http.delete<boolean>(`${this.END_POINT}/${id}`);
+  }
+
+  public downloadDocument(document: Document) {
+    return this.http.post(`${this.END_POINT}/download`, document, { responseType: 'blob' as 'json', observe: 'response' });
   }
 
 }

@@ -9,6 +9,7 @@ import { TimeSlot } from '../../../models/time-slot';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DocumentService } from '../../../services/document.service';
 import { Document } from '../../../models/document';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-upload-document',
@@ -93,7 +94,7 @@ export class UploadDocumentComponent implements OnInit {
       this.messageText = 'Document deleted successfully.';
       this.messageType = 'success';
       this.alertToBeShown = true;
-      this.documents.splice(index - 1, 1);
+      this.documents.splice(index, 1);
     }, error => {
       this.showModalError();
     });
@@ -103,6 +104,15 @@ export class UploadDocumentComponent implements OnInit {
     this.messageText = 'Something went wrong, try again later';
     this.messageType = 'danger';
     this.alertToBeShown = true;
+  }
+
+  downloadFile(document: Document) {
+    this.documentService.downloadDocument(document).subscribe((res: HttpResponse<Object>) => {
+      const contentType = res.headers.get('Content-Type');
+      const blob: Blob = new Blob([res.body], {type: contentType});
+      const url = window.URL.createObjectURL(blob);
+      window.open(url);
+    }, error => console.log(error));
   }
 
   initFilter(): LessonFilter {
