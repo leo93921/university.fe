@@ -1,0 +1,126 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb mt-3">
+    <li class="breadcrumb-item" aria-current="page">
+      <a class="text-dark" [routerLink]="['/professor']">Home</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Upload a document</li>
+  </ol>
+</nav>
+
+<div class="row mt-3">
+  <div class="col">
+    <h1>Upload a document</h1>
+    <p>Here you can upload a new document.</p>
+  </div>
+</div>
+
+<div class="form-group">
+  <div class="row">
+    <div class="col-12 col-md-6">
+      <div class="form-group">
+        <select class="form-control" name="subject" id="subject" (change)="selectSubject(+$event.target.value)">
+          <option [value]="null" disabled>Select a subject</option>
+          <option *ngFor="let s of subjectList" [value]="s.id">{{ s.name }}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mt-3">
+  <h3>Lessons of the week</h3>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Day</th>
+        <th scope="col">Start</th>
+        <th scope="col">End</th>
+        <th scope="col">Classroom</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let l of lessons">
+        <td class="align-middle">{{ l.timeSlot.startTime | date }}</td>
+        <td class="align-middle">{{ l.timeSlot.startTime | date:'shortTime' }}</td>
+        <td class="align-middle">{{ l.timeSlot.endTime | date:'shortTime' }}</td>
+        <td class="align-middle">{{ l.classroom.name }}</td>
+        <td class="align-middle text-right"><button class="btn btn-link btn-sm" (click)="openModal(modal, l)"><i class="far fa-file-alt"></i></button></td>
+      </tr>
+      <tr *ngIf="lessons.length === 0">
+        <td colspan="5" class="text-center"><small>No lessons present for the selected subject.</small></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #modal let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Documents</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Document for the lesson of <span class="font-weight-bold">{{ selectedLesson.timeSlot.startTime | date }}</span>, starting at {{ selectedLesson.timeSlot.startTime | date:'shortTime' }} to {{ selectedLesson.timeSlot.endTime | date:'shortTime' }}</p>
+    <table class="table">
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Note</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let d of documents">
+            <td class="align-middle">{{ d.name }}</td>
+            <td class="align-middle">{{ d.note }}</td>
+            <td class="align-middle text-right">
+              <button class="btn btn-link btn-sm"><i class="fas fa-download"></i></button>
+              <button class="btn btn-link btn-sm"><i class="fas fa-trash-alt"></i></button>
+            </td>
+          </tr>
+          <tr *ngIf="documents.length === 0">
+            <td colspan="3" class="text-center"><small>No documents uploaded. Upload a new one to see it here.</small></td>
+          </tr>
+        </tbody>
+      </table>
+      <hr>
+
+      <div *ngIf="alertToBeShown" class="alert alert-{{ messageType }} alert-dismissible fade show">
+        {{ messageText }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="alertToBeShown = false">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+        <form #f="ngForm" (ngSubmit)="save()">
+          <div class="row">
+            <div class="col-12 col-sm-6">
+              <div class="form-group">
+                <label for="name">Document name</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Name" [(ngModel)]="toUpload.name" required>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6">
+                <div class="form-group">
+                    <label>File</label>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="customFile" name="customFile" [(ngModel)]="filename" (change)="change($event)" required>
+                        <label class="custom-file-label text-truncate" for="customFile">{{ filename ? filename : 'Choose a file' }}</label>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="note">Note</label>
+                    <textarea class="form-control" id="note" rows="3" name="note" [(ngModel)]="toUpload.note" required></textarea>
+                  </div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">Add</button>
+        </form>
+  </div>
+</ng-template>
+  

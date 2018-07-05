@@ -7,18 +7,8 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item dropdown active">
-        <a class="nav-link dropdown-toggle" href="#" id="courseOfStudyDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-          aria-expanded="false">
-          Course of study
-        </a>
-        <div class="dropdown-menu" aria-labelledby="courseOfStudyDropdown">
-          <a class="dropdown-item" [routerLink]="['course-of-study']">Create a course of study</a>
-          <a class="dropdown-item" [routerLink]="['subjects']">Assign subjects</a>
-          <a class="dropdown-item" [routerLink]="['professors']">Add a professor</a>
-          <a class="dropdown-item" [routerLink]="['classrooms']">Add a classroom</a>
-          <a class="dropdown-item" [routerLink]="['lessons']">Add a lesson</a>
-        </div>
+      <li class="nav-item active">
+        <a class="nav-link" [routerLink]="['upload-document']">Upload a document</a>
       </li>
     </ul>
     <ul class="navbar-nav ml-auto">

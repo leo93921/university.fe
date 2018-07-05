@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Subject } from '../models/subject';
 import { CourseOfStudy } from '../models/course-of-study';
+import { User } from '../models/User';
 
 @Injectable({
   providedIn: 'root'
@@ -21,5 +22,9 @@ export class SubjectService {
 
   public save(subject: Subject): Observable<Subject> {
     return this.http.post<Subject>(this.END_POINT, subject);
+  }
+
+  public getByProfessor(prof: User): Observable<Subject[]> {
+    return this.http.post<Subject[]>(`${this.END_POINT}/find-by-prof`, prof);
   }
 }
