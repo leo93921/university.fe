@@ -18,6 +18,7 @@ import { LessonsManagementComponent } from './components/secretariat/lessons-man
 import { ProfessorHomeComponent } from './components/professor/professor-home/professor-home.component';
 import { ProfessorPanelComponent } from './components/professor/professor-panel/professor-panel.component';
 import { UploadDocumentComponent } from './components/professor/upload-document/upload-document.component';
+import { ExamManagementComponent } from './components/secretariat/exam-management/exam-management.component';
 
 const appRoutes: Routes = [
   { path: 'secretariat', component: SecretariatHomeComponent, children: [
@@ -27,6 +28,7 @@ const appRoutes: Routes = [
     { path: 'professors', component: ProfessorsComponent },
     { path: 'classrooms', component: ClassroomsComponent },
     { path: 'lessons', component: LessonsManagementComponent },
+    { path: 'exams', component: ExamManagementComponent },
     { path: '**', component: SecretariatPanelComponent}
   ]},
   { path: 'professor', component: ProfessorHomeComponent, children: [
@@ -50,7 +52,8 @@ const appRoutes: Routes = [
     LessonsManagementComponent,
     ProfessorHomeComponent,
     ProfessorPanelComponent,
-    UploadDocumentComponent
+    UploadDocumentComponent,
+    ExamManagementComponent
   ],
   imports: [
     BrowserModule,

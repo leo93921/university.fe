@@ -1,0 +1,87 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb mt-3">
+    <li class="breadcrumb-item" aria-current="page">
+      <a class="text-dark" [routerLink]="['/secretariat']">Home</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Add an exam</li>
+  </ol>
+</nav>
+
+<div class="row mt-3">
+  <div class="col">
+    <h1>Add a new exam</h1>
+    <p>Here you can create a new exam. It will be automatically added to the academic calendar.</p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12 col-md-6">
+      <div class="form-group">
+        <label for="course">Course of study *</label>
+        <select class="form-control" name="course" id="course" (change)="selectCourseOfStudy(+$event.target.value)">
+          <option [value]="null" disabled>Select a course of study</option>
+          <option *ngFor="let c of coursesOfStudy" [value]="c.id">{{ c.name }}</option>
+        </select>
+      </div>
+    </div>
+</div>
+
+<form #f="ngForm" class=" mt-3" *ngIf="selectedCourseOfStudy" (ngSubmit)="saveExam()">
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <label for="exam-description">Description</label>
+        <textarea class="form-control" id="exam-description" name="exam-description" rows="3" [(ngModel)]="exam.description"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-md-6">
+      <div class="form-group">
+        <label for="course">Subject *</label>
+        <select class="form-control" name="subject" id="subject" required [(ngModel)]="subjectID">
+          <option [value]="null" disabled>Select a subject</option>
+          <option *ngFor="let s of subjects" [value]="s.id">{{ s.name }}</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-12 col-md-6">
+      <div class="form-group">
+        <label for="course">Classroom *</label>
+        <select class="form-control" name="classroom" id="classroom" required [(ngModel)]="classroomID">
+          <option [value]="null" disabled>Select a classroom</option>
+          <option *ngFor="let c of classrooms" [value]="c.id">{{ c.name }}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6 col-md-3">
+      <div class="form-group">
+        <label for="startTime">Start time *</label>
+        <ngb-timepicker required [(ngModel)]="startTime" name="startTime" [spinners]="false"></ngb-timepicker>          
+      </div>
+    </div>
+    <div class="col-6 col-md-3">
+      <div class="form-group">
+        <label for="endTime">End time *</label>
+        <ngb-timepicker required [(ngModel)]="endTime" name="endTime" [spinners]="false"></ngb-timepicker>
+      </div>
+    </div>
+    <div class="col-6 col-md-3">
+      <div class="form-group">
+        <label for="startDate">Day *</label>
+        <div class="input-group">
+            <input class="form-control" placeholder="yyyy-mm-dd" required
+                   name="startDate" [(ngModel)]="examDay" ngbDatepicker #startDatePicker="ngbDatepicker" placement="top-left">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" (click)="startDatePicker.toggle()" type="button">
+                  <i class="fas fa-calendar-alt"></i>
+              </button>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary" [disabled]="f.invalid">Save</button>
+</form>
