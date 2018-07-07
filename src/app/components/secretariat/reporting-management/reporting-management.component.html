@@ -29,13 +29,13 @@
     </thead>
     <tbody>
       <tr *ngFor="let p of problems">
-        <th scope="row">{{ p.id }}</th>
-        <td>{{ p.supportDevice.name }}</td>
-        <td>{{ p.description }}</td>
-        <td>{{ p.reportingStatus }}</td>
-        <td>{{ p.classroom.name }}</td>
-        <td>{{ p.doneBy.name }} {{ p.doneBy.surname }}</td>
-        <td>
+        <th class="align-middle" scope="row">{{ p.id }}</th>
+        <td class="align-middle">{{ p.supportDevice.name }}</td>
+        <td class="align-middle">{{ p.description }}</td>
+        <td class="align-middle">{{ statusTranslation[p.reportingStatus] }}</td>
+        <td class="align-middle">{{ p.classroom.name }}</td>
+        <td class="align-middle">{{ p.doneBy.name }} {{ p.doneBy.surname }}</td>
+        <td class="align-middle">
           <button class="btn btn-link btn-sm"  (click)="goToProblem(p.id)"><i class="fas fa-arrow-circle-right text-primary"></i></button>
         </td>
       </tr>

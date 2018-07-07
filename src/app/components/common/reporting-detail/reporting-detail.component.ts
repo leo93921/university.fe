@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '../../../../../node_modules/@angular/router';
 import { ReportingService } from '../../../services/reporting.service';
 import { Reporting } from '../../../models/reporting';
+import { REPORT_STATUSES, REPORT_STATUS_TRANSLATION } from '../../../models/reporting-status';
 
 @Component({
   selector: 'app-reporting-detail',
@@ -12,14 +13,8 @@ export class ReportingDetailComponent implements OnInit {
 
   problem: Reporting = {} as Reporting;
   model: Reporting = {} as Reporting;
-  reportStatuses = [
-    { status: 'REPORTED', display: 'Reported' },
-    { status: 'WORKING_ON_IT', display: 'Working on it' },
-    { status: 'FIXED', display: 'Fixed' },
-    { status: 'NOT_FIXED', display: 'Not fixed' },
-    { status: 'NOT_A_PROBLEM', display: 'Not a problem' },
-    { status: 'DELAYED', display: 'Delayed' }
-  ];
+  reportStatuses = REPORT_STATUSES;
+  translations = REPORT_STATUS_TRANSLATION;
 
   constructor(
     private activatedRoute: ActivatedRoute,
