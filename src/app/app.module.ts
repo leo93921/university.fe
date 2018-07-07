@@ -20,6 +20,7 @@ import { ProfessorPanelComponent } from './components/professor/professor-panel/
 import { UploadDocumentComponent } from './components/professor/upload-document/upload-document.component';
 import { ExamManagementComponent } from './components/secretariat/exam-management/exam-management.component';
 import { ReportingManagementComponent } from './components/secretariat/reporting-management/reporting-management.component';
+import { ReportingDetailComponent } from './components/common/reporting-detail/reporting-detail.component';
 
 const appRoutes: Routes = [
   { path: 'secretariat', component: SecretariatHomeComponent, children: [
@@ -38,6 +39,7 @@ const appRoutes: Routes = [
     { path: 'upload-document', component: UploadDocumentComponent },
     { path: '**', component: ProfessorPanelComponent }
   ]},
+  { path: 'problem/:id', component: ReportingDetailComponent },
   { path: '**', component: LoginComponent }
 ];
 
@@ -56,7 +58,8 @@ const appRoutes: Routes = [
     ProfessorPanelComponent,
     UploadDocumentComponent,
     ExamManagementComponent,
-    ReportingManagementComponent
+    ReportingManagementComponent,
+    ReportingDetailComponent
   ],
   imports: [
     BrowserModule,

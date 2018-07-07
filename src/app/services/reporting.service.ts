@@ -18,4 +18,12 @@ export class ReportingService {
     return this.http.get<Reporting[]>(`${this.END_POINT}/find-all`);
   }
 
+  public getByID(ID: number): Observable<Reporting> {
+    return this.http.get<Reporting>(`${this.END_POINT}/${ID}`);
+  }
+
+  public saveReporting(reporting: Reporting): Observable<Reporting> {
+    return this.http.post<Reporting>(this.END_POINT, reporting);
+  }
+
 }

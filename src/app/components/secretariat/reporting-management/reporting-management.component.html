@@ -36,7 +36,7 @@
         <td>{{ p.classroom.name }}</td>
         <td>{{ p.doneBy.name }} {{ p.doneBy.surname }}</td>
         <td>
-          <button class="btn btn-link btn-sm"><i class="fas fa-arrow-circle-right text-primary"></i></button>
+          <button class="btn btn-link btn-sm"  (click)="goToProblem(p.id)"><i class="fas fa-arrow-circle-right text-primary"></i></button>
         </td>
       </tr>
       <tr *ngIf="problems.length === 0">
