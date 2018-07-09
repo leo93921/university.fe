@@ -10,9 +10,16 @@
       <li class="nav-item active">
         <a class="nav-link" [routerLink]="['upload-document']">Upload a document</a>
       </li>
-      <li class="nav-item active">
-        <a class="nav-link" [routerLink]="['report-problem']">Report a problem</a>
-      </li>
+      <li class="nav-item dropdown active">
+          <a class="nav-link dropdown-toggle" href="#" id="problemsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            Problems
+          </a>
+          <div class="dropdown-menu" aria-labelledby="problemsDropdown">
+            <a class="dropdown-item" [routerLink]="['report-problem']">Report a problem</a>
+            <a class="dropdown-item" [routerLink]="['reported-problems']">Reported problems</a>
+          </div>
+        </li>
     </ul>
     <ul class="navbar-nav ml-auto">
       <li class="nav-item active">

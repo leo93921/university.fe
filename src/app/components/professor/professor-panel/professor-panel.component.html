@@ -1,5 +1,5 @@
 <div class="row mt-3">
-  <div class="col-12 col-md-6 col-lg-4">
+  <div class="col-12 col-md-6 col-lg-4 mt-3">
     <div class="card bg-white text-dark border border-secondary">
       <div class="card-body">
         <div class="card-title">
@@ -14,17 +14,20 @@
       </div>
     </div>
   </div>
-  <div class="col-12 col-md-6 col-lg-4">
+  <div class="col-12 col-md-6 col-lg-4 mt-3">
     <div class="card bg-white text-dark border border-secondary">
       <div class="card-body">
         <div class="card-title">
           <h5>Problems</h5>
         </div>
-        <p class="card-text">Here you can manage the problem you reported and see the status.</p>
+        <p class="card-text">Here you can manage the problem you reported and see their status.</p>
         <ul>
           <li>
             <a [routerLink]="['report-problem']" class="text-dark">Report a problem</a>
           </li>
+          <li>
+              <a [routerLink]="['reported-problems']" class="text-dark">Reported problems</a>
+            </li>
         </ul>
       </div>
     </div>

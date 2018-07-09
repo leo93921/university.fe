@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Reporting } from '../models/reporting';
+import { User } from '../models/User';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,10 @@ export class ReportingService {
 
   public saveReporting(reporting: Reporting): Observable<Reporting> {
     return this.http.post<Reporting>(this.END_POINT, reporting);
+  }
+
+  public findByProfessor(prof: User): Observable<Reporting[]> {
+    return this.http.post<Reporting[]>(`${this.END_POINT}/find-by-professor`, prof);
   }
 
 }

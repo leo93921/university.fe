@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ReportingService } from '../../../services/reporting.service';
 import { Reporting } from '../../../models/reporting';
-import { Router } from '../../../../../node_modules/@angular/router';
-import { REPORT_STATUS_TRANSLATION } from '../../../models/reporting-status';
 
 @Component({
   selector: 'app-reporting-management',
@@ -12,11 +10,9 @@ import { REPORT_STATUS_TRANSLATION } from '../../../models/reporting-status';
 export class ReportingManagementComponent implements OnInit {
 
   problems: Reporting[] = [];
-  statusTranslation = REPORT_STATUS_TRANSLATION;
 
   constructor(
-    private reportingService: ReportingService,
-    private router: Router
+    private reportingService: ReportingService
   ) { }
 
   ngOnInit() {
@@ -25,7 +21,4 @@ export class ReportingManagementComponent implements OnInit {
     });
   }
 
-  goToProblem(problemID: number) {
-    this.router.navigateByUrl(`/problem/${problemID}`);
-  }
 }

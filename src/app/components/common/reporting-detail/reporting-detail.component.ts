@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '../../../../../node_modules/@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
+import { LocalStorage } from '@ngx-pwa/local-storage';
 import { ReportingService } from '../../../services/reporting.service';
 import { Reporting } from '../../../models/reporting';
 import { REPORT_STATUSES, REPORT_STATUS_TRANSLATION } from '../../../models/reporting-status';
+import { User } from '../../../models/User';
 
 @Component({
   selector: 'app-reporting-detail',
@@ -15,10 +17,12 @@ export class ReportingDetailComponent implements OnInit {
   model: Reporting = {} as Reporting;
   reportStatuses = REPORT_STATUSES;
   translations = REPORT_STATUS_TRANSLATION;
+  loggedUser: User = {} as User;
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private reportingService: ReportingService
+    private reportingService: ReportingService,
+    private localStorage: LocalStorage
   ) { }
 
   ngOnInit() {
@@ -27,6 +31,9 @@ export class ReportingDetailComponent implements OnInit {
       this.reportingService.getByID(id).subscribe(reporting => {
         this.setReporting(reporting);
       });
+    });
+    this.localStorage.getItem('loggedUser').subscribe(user => {
+      this.loggedUser = user;
     });
   }
 

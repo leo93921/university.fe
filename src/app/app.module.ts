@@ -22,6 +22,8 @@ import { ExamManagementComponent } from './components/secretariat/exam-managemen
 import { ReportingManagementComponent } from './components/secretariat/reporting-management/reporting-management.component';
 import { ReportingDetailComponent } from './components/common/reporting-detail/reporting-detail.component';
 import { ReportProblemComponent } from './components/professor/report-problem/report-problem.component';
+import { ReportedProblemsComponent } from './components/professor/reported-problems/reported-problems.component';
+import { ReportingListComponent } from './components/common/reporting-list/reporting-list.component';
 
 const appRoutes: Routes = [
   { path: 'secretariat', component: SecretariatHomeComponent, children: [
@@ -39,6 +41,7 @@ const appRoutes: Routes = [
     { path: '', component: ProfessorPanelComponent },
     { path: 'upload-document', component: UploadDocumentComponent },
     { path: 'report-problem', component: ReportProblemComponent },
+    { path: 'reported-problems', component: ReportedProblemsComponent },
     { path: '**', component: ProfessorPanelComponent }
   ]},
   { path: 'problem/:id', component: ReportingDetailComponent },
@@ -62,7 +65,9 @@ const appRoutes: Routes = [
     ExamManagementComponent,
     ReportingManagementComponent,
     ReportingDetailComponent,
-    ReportProblemComponent
+    ReportProblemComponent,
+    ReportedProblemsComponent,
+    ReportingListComponent
   ],
   imports: [
     BrowserModule,
