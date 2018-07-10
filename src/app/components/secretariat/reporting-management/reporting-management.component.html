@@ -14,4 +14,31 @@
   </div>
 </div>
 
+<div class="text-right">
+  <button class="btn btn-outline-primary" type="button" (click)="toggleFilter()">
+    {{ filterHidden ? 'Open' : 'Close' }} filters
+    </button>
+</div>
+<div class="form-group mt-3" [hidden]="filterHidden">
+  <div class="row">
+    <div class="col-12 col-md-6">
+      <div class="form-group">
+        <select class="form-control" id="classroom" (change)="selectClassroom(+$event.target.value)">
+          <option [value]="null">Filter by classroom</option>
+          <option *ngFor="let c of classrooms" [value]="c.id">{{ c.name }}</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-12 col-md-6">
+        <div class="form-group">
+          <select class="form-control" id="status" name="status" (change)="filterByStatus()" [(ngModel)]="selectedStatus">
+            <option [value]="''">Filter by status</option>
+            <option *ngFor="let s of reportStatuses" [value]="s.status">{{ s.display }}</option>
+          </select>
+        </div>
+      </div>
+  </div>
+</div>
+
+
 <app-reporting-list [problems]="problems"></app-reporting-list>
