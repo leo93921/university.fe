@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-
-import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+
+import { environment } from '../../environments/environment';
 import { Reporting } from '../models/reporting';
 import { User } from '../models/User';
+import { Classroom } from '../models/classroom';
 
 @Injectable({
   providedIn: 'root'
@@ -31,4 +32,7 @@ export class ReportingService {
     return this.http.post<Reporting[]>(`${this.END_POINT}/find-by-professor`, prof);
   }
 
+  public findByClassroom(classroom: Classroom): Observable<Reporting[]> {
+    return this.http.post<Reporting[]>(`${this.END_POINT}/find-by-classroom`, classroom);
+  }
 }
