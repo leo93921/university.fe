@@ -25,26 +25,34 @@ import { ReportProblemComponent } from './components/professor/report-problem/re
 import { ReportedProblemsComponent } from './components/professor/reported-problems/reported-problems.component';
 import { ReportingListComponent } from './components/common/reporting-list/reporting-list.component';
 import { ClassroomProblemsComponent } from './components/professor/classroom-problems/classroom-problems.component';
+import { SecretariatSectionGuard } from './common/secretariat-section.guard';
+import { ProfessorSectionGuard } from './common/professor-section.guard';
 
 const appRoutes: Routes = [
-  { path: 'secretariat', component: SecretariatHomeComponent, children: [
-    { path: '', component: SecretariatPanelComponent },
-    { path: 'course-of-study', component: CourseOfStudyComponent },
-    { path: 'subjects', component: TeachingAssignmentComponent },
-    { path: 'professors', component: ProfessorsComponent },
-    { path: 'classrooms', component: ClassroomsComponent },
-    { path: 'lessons', component: LessonsManagementComponent },
-    { path: 'exams', component: ExamManagementComponent },
-    { path: 'problems', component: ReportingManagementComponent },
-    { path: '**', component: SecretariatPanelComponent}
+  { path: 'secretariat',
+    component: SecretariatHomeComponent,
+    canActivate: [SecretariatSectionGuard],
+    children: [
+      { path: '', component: SecretariatPanelComponent },
+      { path: 'course-of-study', component: CourseOfStudyComponent },
+      { path: 'subjects', component: TeachingAssignmentComponent },
+      { path: 'professors', component: ProfessorsComponent },
+      { path: 'classrooms', component: ClassroomsComponent },
+      { path: 'lessons', component: LessonsManagementComponent },
+      { path: 'exams', component: ExamManagementComponent },
+      { path: 'problems', component: ReportingManagementComponent },
+      { path: '**', component: SecretariatPanelComponent}
   ]},
-  { path: 'professor', component: ProfessorHomeComponent, children: [
-    { path: '', component: ProfessorPanelComponent },
-    { path: 'upload-document', component: UploadDocumentComponent },
-    { path: 'report-problem', component: ReportProblemComponent },
-    { path: 'reported-problems', component: ReportedProblemsComponent },
-    { path: 'classroom-problems', component: ClassroomProblemsComponent },
-    { path: '**', component: ProfessorPanelComponent }
+  { path: 'professor',
+    component: ProfessorHomeComponent,
+    canActivate: [ ProfessorSectionGuard ],
+    children: [
+      { path: '', component: ProfessorPanelComponent },
+      { path: 'upload-document', component: UploadDocumentComponent },
+      { path: 'report-problem', component: ReportProblemComponent },
+      { path: 'reported-problems', component: ReportedProblemsComponent },
+      { path: 'classroom-problems', component: ClassroomProblemsComponent },
+      { path: '**', component: ProfessorPanelComponent }
   ]},
   { path: 'problem/:id', component: ReportingDetailComponent },
   { path: '**', component: LoginComponent }
