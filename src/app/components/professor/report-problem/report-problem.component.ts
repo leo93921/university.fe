@@ -6,6 +6,7 @@ import { SupportDevice } from '../../../models/support-device';
 import { LocalStorage } from '../../../../../node_modules/@ngx-pwa/local-storage';
 import { ReportingService } from '../../../services/reporting.service';
 import { MessageService } from '../../../services/message.service';
+import { REPORT_STATUSES } from '../../../models/reporting-status';
 
 @Component({
   selector: 'app-report-problem',
@@ -18,6 +19,7 @@ export class ReportProblemComponent implements OnInit {
   classes: Classroom[] = [];
   selectedClassroom: Classroom = {} as Classroom;
   selectedDevice: SupportDevice = {} as SupportDevice;
+  reportStatus = REPORT_STATUSES;
 
   // for the form selects
   classID = null;
@@ -51,14 +53,18 @@ export class ReportProblemComponent implements OnInit {
   saveReport() {
     // fill the model
     this.model.classroom = this.selectedClassroom;
-    this.model.supportDevice = this.selectedDevice;
-    this.model.reportingStatus = 'REPORTED';
+    if (this.deviceID === null) {
+      this.model.supportDevice = null;
+    } else {
+      this.model.supportDevice = this.selectedDevice;
+    }
+    this.model.reportingStatus = this.reportStatus[0].status;
     this.model.lastModified = Date.now();
     this.reportingService.saveReporting(this.model).subscribe(saved => {
       this.messageService.showSuccess('The problem has been reported successfully.');
       this.classID = null;
       this.deviceID = null;
-      this.model.description = '';
+      this.model.problemDescription = '';
     }, error => {
       this.messageService.showDanger('Something went wrong, please try again.');
     });

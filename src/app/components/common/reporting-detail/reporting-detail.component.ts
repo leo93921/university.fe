@@ -49,11 +49,11 @@ export class ReportingDetailComponent implements OnInit {
 
     this.model.reportingStatus = modelFromHttp.reportingStatus;
     this.model.classroom = modelFromHttp.classroom;
-    this.model.description = modelFromHttp.description;
+    this.model.note = modelFromHttp.note;
     this.model.doneBy = modelFromHttp.doneBy;
     this.model.id = modelFromHttp.id;
     this.model.supportDevice = modelFromHttp.supportDevice;
     this.model.reportingStatus = modelFromHttp.reportingStatus;
-
+    this.model.problemDescription = modelFromHttp.problemDescription;
   }
 }

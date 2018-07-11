@@ -7,7 +7,8 @@ export interface Reporting {
   reportingStatus: string;
   classroom: Classroom;
   supportDevice: SupportDevice;
-  description: string;
+  note: string;
   lastModified: number;
   doneBy: User;
+  problemDescription: string;
 }

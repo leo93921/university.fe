@@ -3,10 +3,10 @@
       <thead class="thead-dark">
         <tr>
           <th scope="col">#</th>
+          <th scope="col">Classroom</th>
           <th scope="col">Device</th>
           <th scope="col">Description</th>
           <th scope="col">Status</th>
-          <th scope="col">Classroom</th>
           <th scope="col">Reporter</th>
           <th scope="col"></th>
         </tr>
@@ -14,10 +14,10 @@
       <tbody>
         <tr *ngFor="let p of problems">
           <th class="align-middle" scope="row">{{ p.id }}</th>
-          <td class="align-middle">{{ p.supportDevice.name }}</td>
-          <td class="align-middle">{{ p.description }}</td>
-          <td class="align-middle">{{ statusTranslation[p.reportingStatus] }}</td>
           <td class="align-middle">{{ p.classroom.name }}</td>
+          <td class="align-middle">{{ p.supportDevice?.name }}</td>
+          <td class="align-middle">{{ p.problemDescription }}</td>
+          <td class="align-middle">{{ statusTranslation[p.reportingStatus] }}</td>
           <td class="align-middle">{{ p.doneBy.name }} {{ p.doneBy.surname }}</td>
           <td class="align-middle">
             <button class="btn btn-link btn-sm"  (click)="goToProblem(p.id)"><i class="fas fa-arrow-circle-right text-primary"></i></button>
