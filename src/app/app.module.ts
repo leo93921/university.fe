@@ -27,6 +27,7 @@ import { ReportingListComponent } from './components/common/reporting-list/repor
 import { ClassroomProblemsComponent } from './components/professor/classroom-problems/classroom-problems.component';
 import { SecretariatSectionGuard } from './common/secretariat-section.guard';
 import { ProfessorSectionGuard } from './common/professor-section.guard';
+import { ModifyLessonsComponent } from './components/secretariat/modify-lessons/modify-lessons.component';
 
 const appRoutes: Routes = [
   { path: 'secretariat',
@@ -41,6 +42,7 @@ const appRoutes: Routes = [
       { path: 'lessons', component: LessonsManagementComponent },
       { path: 'exams', component: ExamManagementComponent },
       { path: 'problems', component: ReportingManagementComponent },
+      { path: 'modify-lessons', component: ModifyLessonsComponent },
       { path: '**', component: SecretariatPanelComponent}
   ]},
   { path: 'professor',
@@ -78,7 +80,8 @@ const appRoutes: Routes = [
     ReportProblemComponent,
     ReportedProblemsComponent,
     ReportingListComponent,
-    ClassroomProblemsComponent
+    ClassroomProblemsComponent,
+    ModifyLessonsComponent
   ],
   imports: [
     BrowserModule,

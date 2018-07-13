@@ -1,0 +1,128 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb mt-3">
+    <li class="breadcrumb-item" aria-current="page">
+      <a class="text-dark" [routerLink]="['/secretariat']">Home</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Modify a lesson</li>
+  </ol>
+</nav>
+
+<div class="row mt-3">
+  <div class="col">
+    <h1>Modify a lesson</h1>
+    <p>Here you can modify a lesson. Just select a course of study, a subject and the you can move lessons from a classroom
+      to an other, or just change the scheduled times.</p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-12 col-md-6">
+    <div class="form-group">
+      <label for="course">Course of study *</label>
+      <select class="form-control" name="course" id="course" (change)="selectCourseOfStudy(+$event.target.value)">
+        <option [value]="null" disabled>Select a course of study</option>
+        <option *ngFor="let c of coursesOfStudy" [value]="c.id">{{ c.name }}</option>
+      </select>
+    </div>
+  </div>
+  <div class="col-12 col-md-6">
+    <div class="form-group">
+      <label for="course">Subject *</label>
+      <select class="form-control" name="subject" id="subject" (change)="selectSubject(+$event.target.value)" required>
+        <option [value]="null" disabled>Select a subject</option>
+        <option *ngFor="let s of subjectList" [value]="s.id">{{ s.name }}</option>
+      </select>
+    </div>
+  </div>
+</div>
+
+<div class="mt-3">
+  <h3>Lessons</h3>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Day</th>
+        <th scope="col">Start</th>
+        <th scope="col">End</th>
+        <th scope="col">Classroom</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let l of lessons">
+        <td class="align-middle">{{ l.timeSlot.startTime | date }}</td>
+        <td class="align-middle">{{ l.timeSlot.startTime | date:'shortTime' }}</td>
+        <td class="align-middle">{{ l.timeSlot.endTime | date:'shortTime' }}</td>
+        <td class="align-middle">{{ l.classroom.name }}</td>
+        <td class="align-middle text-right">
+          <button class="btn btn-link btn-sm" (click)="openModal(modal, l)">
+            <i class="far fa-edit"></i>
+          </button>
+        </td>
+      </tr>
+      <tr *ngIf="lessons.length === 0">
+        <td colspan="5" class="text-center">
+          <small>No lessons present for the selected subject.</small>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #modal let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Modify the lesson</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form novalidate #form="ngForm" (ngSubmit)="saveLesson()">
+      <div class="form-group">
+        <div class="row">
+          <div class="col-12 col-md-6">
+            <div class="form-group">
+              <label for="classroom">Classroom *</label>
+              <select class="form-control" name="classroom" id="classroom" [(ngModel)]="classroomID" required>
+                <option [value]="null" disabled>Select a classroom</option>
+                <option *ngFor="let c of classList" [value]="c.id">{{ c.name }}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6 col-md-4">
+            <div class="form-group">
+              <label for="startDate">Start date *</label>
+              <div class="input-group">
+                <input class="form-control" placeholder="yyyy-mm-dd" required name="startDate" [(ngModel)]="startDate" ngbDatepicker #startDatePicker="ngbDatepicker"
+                  placement="bottom-right">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" (click)="startDatePicker.toggle()" type="button">
+                    <i class="fas fa-calendar-alt"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-4">
+            <div class="form-group">
+              <label for="startTime">Start time *</label>
+              <ngb-timepicker required [(ngModel)]="startTime" name="startTime" [spinners]="false"></ngb-timepicker>
+            </div>
+          </div>
+          <div class="col-6 col-md-4">
+            <div class="form-group">
+              <label for="endTime">End time *</label>
+              <ngb-timepicker required [(ngModel)]="endTime" name="endTime" [spinners]="false"></ngb-timepicker>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+        Add a lesson
+      </button>
+    </form>
+  </div>
+</ng-template>

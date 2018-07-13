@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Lesson } from '../models/lesson';
 import { LessonFilter } from '../models/lesson-filter';
+import { Subject } from '../models/subject';
 
 @Injectable({
   providedIn: 'root'
@@ -21,5 +22,9 @@ export class LessonService {
 
   public filterLesson(filter: LessonFilter): Observable<Lesson[]> {
     return this.http.post<Lesson[]>(`${this.END_POINT}/filter`, filter);
+  }
+
+  public getBySubject(subject: Subject): Observable<Lesson[]> {
+    return this.http.post<Lesson[]>(`${this.END_POINT}/find-by-subject`, subject);
   }
 }
