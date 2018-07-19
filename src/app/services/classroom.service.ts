@@ -25,4 +25,8 @@ export class ClassroomService {
   public get(classroomID: number): Observable<Classroom> {
     return this.http.get<Classroom>(`${this.END_POINT}/${classroomID}`);
   }
+
+  public deleteClassroom(classroom: Classroom): Observable<boolean> {
+    return this.http.delete<boolean>(`${this.END_POINT}/${classroom.id}`);
+  }
 }

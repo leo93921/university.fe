@@ -3,6 +3,7 @@ import { Classroom } from '../../../models/classroom';
 import { ClassroomService } from '../../../services/classroom.service';
 import { MessageService } from '../../../services/message.service';
 import { SupportDevice } from '../../../models/support-device';
+import { take } from '../../../../../node_modules/rxjs/operators';
 
 @Component({
   selector: 'app-classrooms',
@@ -27,7 +28,10 @@ export class ClassroomsComponent implements OnInit {
   }
 
   updateList() {
-    this.classroomService.getAll().subscribe(list => this.classroomList = list, error => {
+    this.classroomService.getAll().subscribe(list => {
+      this.classroomList = [];
+      this.classroomList = list;
+    }, error => {
       this.messageService.showDanger('Something went wrong. Try again later.');
     });
   }
@@ -36,7 +40,8 @@ export class ClassroomsComponent implements OnInit {
     this.model.latitude = this.marker.lat;
     this.model.longitude = this.marker.lng;
     this.classroomService.saveClassroom(this.model).subscribe(saved => {
-      this.classroomList.push(saved);
+      this.messageService.showSuccess('The classroom has been saved.');
+      this.updateList();
       this.initModel();
     }, error => {
       this.messageService.showDanger('Something went wrong. Try again later.');
@@ -55,6 +60,23 @@ export class ClassroomsComponent implements OnInit {
 
   removeSupportDevice(index: number) {
     this.model.supportDevices.splice(index, 1);
+  }
+
+  deleteClassroom(classroom: Classroom) {
+    this.classroomService.deleteClassroom(classroom).pipe(take(1)).subscribe(res => {
+      this.messageService.showSuccess('The classroom has been deleted');
+      this.updateList();
+    }, err => this.messageService.showDanger('Something went wrong. Try again.'));
+  }
+
+  selectClassroom(classroom: Classroom) {
+    this.model = classroom;
+    this.marker = {
+      lat: classroom.latitude,
+      lng: classroom.longitude,
+      label: classroom.name,
+      draggable: true
+    };
   }
 
   mapClicked($event) {

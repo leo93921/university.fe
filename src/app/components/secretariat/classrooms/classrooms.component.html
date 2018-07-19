@@ -24,6 +24,7 @@
             <th scope="col">Name</th>
             <th scope="col">Latitude</th>
             <th scope="col">Longitude</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -31,11 +32,19 @@
             <th scope="row">{{ class.name }}</th>
             <th>{{ class.latitude }}</th>
             <th>{{ class.longitude }}</th>
+            <td class="text-right">
+                <button class="btn btn-link" (click)="selectClassroom(class)" type="button" data-toggle="modal" data-target="#myModal">
+                    <i class="far fa-edit"></i>
+                </button>
+              <button class="btn btn-link" (click)="deleteClassroom(class)">
+                <i class="far fa-trash-alt text-danger"></i>
+              </button>
+            </td>
           </tr>
         </tbody>
       </table>
     </div>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+    <button type="button" class="btn btn-primary" (click)="initModel()" data-toggle="modal" data-target="#myModal">
       Add a Classroom
     </button>
   </div>
