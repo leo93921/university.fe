@@ -18,6 +18,9 @@ export class ReportingDetailComponent implements OnInit {
   reportStatuses = REPORT_STATUSES;
   translations = REPORT_STATUS_TRANSLATION;
   loggedUser: User = {} as User;
+  message: string;
+  messageType: string;
+  showMessage = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -41,6 +44,13 @@ export class ReportingDetailComponent implements OnInit {
     this.model.lastModified = (new Date()).getTime();
     this.reportingService.saveReporting(this.model).subscribe(rep => {
       this.setReporting(rep);
+      this.message = 'Reported problem updated successfully.';
+      this.messageType = 'success';
+      this.showMessage = true;
+    }, error => {
+      this.message = 'An error occurred.';
+      this.messageType = 'danger';
+      this.showMessage = true;
     });
   }
 
