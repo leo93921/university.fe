@@ -14,11 +14,7 @@ export class ClassroomsComponent implements OnInit {
 
   classroomList: Classroom[] = [];
   model: Classroom = {} as Classroom;
-  marker: Marker = {
-    lat: 40.3346,
-    lng: 18.117306,
-    draggable: true
-  };
+  marker: Marker = {} as Marker;
 
   constructor(
     private classroomService: ClassroomService,
@@ -50,6 +46,7 @@ export class ClassroomsComponent implements OnInit {
   initModel() {
     this.model = {} as Classroom;
     this.model.supportDevices = [];
+    this.marker = {} as Marker;
   }
 
   addSupportDeviceToModel() {
