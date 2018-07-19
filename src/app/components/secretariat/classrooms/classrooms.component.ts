@@ -14,6 +14,11 @@ export class ClassroomsComponent implements OnInit {
 
   classroomList: Classroom[] = [];
   model: Classroom = {} as Classroom;
+  marker: Marker = {
+    lat: 40.3346,
+    lng: 18.117306,
+    draggable: true
+  };
 
   constructor(
     private classroomService: ClassroomService,
@@ -32,6 +37,8 @@ export class ClassroomsComponent implements OnInit {
   }
 
   saveClassroom() {
+    this.model.latitude = this.marker.lat;
+    this.model.longitude = this.marker.lng;
     this.classroomService.saveClassroom(this.model).subscribe(saved => {
       this.classroomList.push(saved);
       this.initModel();
@@ -52,4 +59,19 @@ export class ClassroomsComponent implements OnInit {
   removeSupportDevice(index: number) {
     this.model.supportDevices.splice(index, 1);
   }
+
+  mapClicked($event) {
+    this.marker = {
+      lat: $event.coords.lat,
+      lng: $event.coords.lng,
+      draggable: true
+    };
+  }
+}
+
+interface Marker {
+  lat: number;
+  lng: number;
+  label?: string;
+  draggable: boolean;
 }

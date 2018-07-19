@@ -63,7 +63,7 @@
                 </div>
               </div>
             </div>
-            <div class="row">
+            <!--<div class="row">
                 <div class="col-12 col-md-6">
                     <div class="form-group">
                       <label for="latitude">Latitude</label>
@@ -78,6 +78,18 @@
                         required>
                     </div>
                   </div>
+            </div>-->
+            <div class="row">
+              <div class="col-12">
+                <label>Position <small>Click on the map to set the position of the classroom</small></label>
+                <agm-map [latitude]="40.3346" [longitude]="18.117306" [zoom]="18" (mapClick)="mapClicked($event)">
+                  <agm-marker
+                    [latitude]="marker.lat"
+                    [longitude]="marker.lng"
+                    [label]="model.name" >
+                  </agm-marker>
+                </agm-map>
+              </div>
             </div>
             <div class="row">
               <div class="col-12">
@@ -108,7 +120,7 @@
       </div>
 
       <div class="modal-footer">
-        <button [disabled]="form.invalid" type="button" class="btn btn-primary" data-dismiss="modal" (click)="saveClassroom()">Save</button>
+        <button [disabled]="form.invalid || !marker.lat || !marker.lng" type="button" class="btn btn-primary" data-dismiss="modal" (click)="saveClassroom()">Save</button>
       </div>
 
     </div>
