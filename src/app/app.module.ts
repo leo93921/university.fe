@@ -29,6 +29,7 @@ import { ClassroomProblemsComponent } from './components/professor/classroom-pro
 import { SecretariatSectionGuard } from './common/secretariat-section.guard';
 import { ProfessorSectionGuard } from './common/professor-section.guard';
 import { ModifyLessonsComponent } from './components/secretariat/modify-lessons/modify-lessons.component';
+import { AcademicYearManagementComponent } from './components/secretariat/academic-year-management/academic-year-management.component';
 
 const appRoutes: Routes = [
   { path: 'secretariat',
@@ -44,6 +45,7 @@ const appRoutes: Routes = [
       { path: 'exams', component: ExamManagementComponent },
       { path: 'problems', component: ReportingManagementComponent },
       { path: 'modify-lessons', component: ModifyLessonsComponent },
+      { path: 'academic-year', component: AcademicYearManagementComponent },
       { path: '**', component: SecretariatPanelComponent}
   ]},
   { path: 'professor',
@@ -82,7 +84,8 @@ const appRoutes: Routes = [
     ReportedProblemsComponent,
     ReportingListComponent,
     ClassroomProblemsComponent,
-    ModifyLessonsComponent
+    ModifyLessonsComponent,
+    AcademicYearManagementComponent
   ],
   imports: [
     BrowserModule,

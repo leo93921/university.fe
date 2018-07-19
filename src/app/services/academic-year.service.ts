@@ -20,4 +20,8 @@ export class AcademicYearService {
     return this.http.get<AcademicYear[]>(`${this.END_POINT}`);
   }
 
+  public saveAcademicYear(academicYear: AcademicYear): Observable<AcademicYear> {
+    return this.http.post<AcademicYear>(`${this.END_POINT}`, academicYear);
+  }
+
 }

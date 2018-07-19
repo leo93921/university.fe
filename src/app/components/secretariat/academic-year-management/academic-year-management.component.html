@@ -1,0 +1,72 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb mt-3">
+    <li class="breadcrumb-item" aria-current="page">
+      <a class="text-dark" [routerLink]="['/secretariat']">Home</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">Academic year management</li>
+  </ol>
+</nav>
+
+<div class="row mt-3">
+  <div class="col">
+    <h1>Academic year management</h1>
+    <p>Here you can manage the academic years.</p>
+  </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col">
+      <p>The following are the classrooms already created.</p>
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col">Start year</th>
+              <th scope="col">End year</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let ay of academicYears">
+              <td>{{ ay.startYear }}</td>
+              <td>{{ ay.endYear }}</td>
+            </tr>
+            <tr *ngIf="academicYears.length === 0">
+              <td colspan="2" class="text-center"><small>No academic years present.</small></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <button type="button" class="btn btn-primary" (click)="openModal(modal)">
+        Add an academic year
+      </button>
+    </div>
+  </div>
+
+<ng-template #modal let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Academic Year</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form #f="ngForm" (ngSubmit)="save()">
+      <div class="row">
+        <div class="col-12 col-sm-6">
+          <div class="form-group">
+            <label for="startYear">Start year</label>
+            <input type="number" class="form-control" id="startYear" name="startYear" placeholder="startYear" [(ngModel)]="model.startYear"
+              required>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6">
+          <div class="form-group">
+            <label for="endYear">End year</label>
+            <input type="number" class="form-control" id="endYear" name="endYear" placeholder="endYear" [(ngModel)]="model.endYear" required>
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+  </div>
+</ng-template>
