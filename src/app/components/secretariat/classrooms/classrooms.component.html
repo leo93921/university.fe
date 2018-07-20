@@ -44,78 +44,73 @@
         </tbody>
       </table>
     </div>
-    <button type="button" class="btn btn-primary" (click)="initModel()" data-toggle="modal" data-target="#myModal">
+    <button type="button" class="btn btn-primary" (click)="openModal(modal)">
       Add a Classroom
     </button>
   </div>
 </div>
 
 
-<div class="modal fade" id="myModal">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-
-      <div class="modal-header">
-        <h4 class="modal-title">Add a new classroom</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
-
-      <div class="modal-body">
-        <form novalidate #form="ngForm">
-          <div class="form-group">
-            <div class="row">
-              <div class="col-12 col-md-12">
-                <div class="form-group">
-                  <label for="name">Name</label>
-                  <input type="text" class="form-control" id="name" name="name" placeholder="Name" [(ngModel)]="model.name"
-                    required>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-12">
-                <label>Position <small>Click on the map to set the position of the classroom</small></label>
-                <agm-map [latitude]="40.3346" [longitude]="18.117306" [zoom]="18" (mapClick)="mapClicked($event)">
-                  <agm-marker
-                    [latitude]="marker.lat"
-                    [longitude]="marker.lng"
-                    [label]="model.name" >
-                  </agm-marker>
-                </agm-map>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-12">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th scope="w-75">Support devices</th>
-                      <th scope="w-25">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let sd of model.supportDevices; let index = index">
-                      <td scope="row">
-                        <input type="text" required [(ngModel)]="sd.name" class="form-control" name="sd-name-{{ index }}" placeholder="Name">
-                      </td>
-                      <td><div class="btn btn-danger" (click)="removeSupportDevice(index)"><i class="fas fa-trash-alt"></i> Remove</div></td>
-                    </tr>
-                    <tr *ngIf="model.supportDevices.length === 0">
-                      <td colspan="2" class="text-center"><small>No devices yet</small></td>
-                    </tr>
-                  </tbody>
-                </table>
-                <div class="btn btn-primary" (click)="addSupportDeviceToModel()">Add a new support device</div>
-              </div>
+<ng-template #modal let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Add a new classroom</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form novalidate #form="ngForm">
+      <div class="form-group">
+        <div class="row">
+          <div class="col-12 col-md-12">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" class="form-control" id="name" name="name" placeholder="Name" [(ngModel)]="model.name"
+                required>
             </div>
           </div>
-        </form>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <label>Position <small>Click on the map to set the position of the classroom</small></label>
+            <agm-map [latitude]="40.3346" [longitude]="18.117306" [zoom]="18" (mapClick)="mapClicked($event)">
+              <agm-marker
+                [latitude]="marker.lat"
+                [longitude]="marker.lng"
+                [label]="model.name" >
+              </agm-marker>
+            </agm-map>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="w-75">Support devices</th>
+                  <th scope="w-25">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let sd of model.supportDevices; let index = index">
+                  <td scope="row">
+                    <input type="text" required [(ngModel)]="sd.name" class="form-control" name="sd-name-{{ index }}" placeholder="Name">
+                  </td>
+                  <td><div class="btn btn-danger" (click)="removeSupportDevice(index)"><i class="fas fa-trash-alt"></i> Remove</div></td>
+                </tr>
+                <tr *ngIf="model.supportDevices.length === 0">
+                  <td colspan="2" class="text-center"><small>No devices yet</small></td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="btn btn-primary" (click)="addSupportDeviceToModel()">Add a new support device</div>
+          </div>
+        </div>
       </div>
-
-      <div class="modal-footer">
-        <button [disabled]="form.invalid || !marker.lat || !marker.lng" type="button" class="btn btn-primary" data-dismiss="modal" (click)="saveClassroom()">Save</button>
-      </div>
-
-    </div>
+    </form>
   </div>
-</div>
+
+  <div class="modal-footer">
+    <button [disabled]="form.invalid || !marker.lat || !marker.lng" type="button" class="btn btn-primary" data-dismiss="modal" (click)="saveClassroom()">Save</button>
+  </div>
+</ng-template>
