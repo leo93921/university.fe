@@ -3,7 +3,8 @@ import { Classroom } from '../../../models/classroom';
 import { ClassroomService } from '../../../services/classroom.service';
 import { MessageService } from '../../../services/message.service';
 import { SupportDevice } from '../../../models/support-device';
-import { take } from '../../../../../node_modules/rxjs/operators';
+import { take } from 'rxjs/operators';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-classrooms',
@@ -16,10 +17,12 @@ export class ClassroomsComponent implements OnInit {
   classroomList: Classroom[] = [];
   model: Classroom = {} as Classroom;
   marker: Marker = {} as Marker;
+  modalRef;
 
   constructor(
     private classroomService: ClassroomService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private modalService: NgbModal
   ) { }
 
   ngOnInit() {
@@ -42,10 +45,15 @@ export class ClassroomsComponent implements OnInit {
     this.classroomService.saveClassroom(this.model).subscribe(saved => {
       this.messageService.showSuccess('The classroom has been saved.');
       this.updateList();
-      this.initModel();
+      this.modalRef.close();
     }, error => {
       this.messageService.showDanger('Something went wrong. Try again later.');
     });
+  }
+
+  openModal(modal) {
+    this.initModel();
+    this.modalRef = this.modalService.open(modal, {size: 'lg'});
   }
 
   initModel() {

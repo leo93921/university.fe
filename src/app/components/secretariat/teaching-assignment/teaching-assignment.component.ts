@@ -67,12 +67,14 @@ export class TeachingAssignmentComponent implements OnInit {
   }
 
   saveSubject() {
+    this.subjectModel.courseOfStudy = this.selectedCourseOfStudy;
     this.subjectService.save(this.subjectModel).subscribe((model) => {
       this.messageService.showAlert({
         message: 'The subject has been saved.',
         type: 'success'
       });
       this.updateSubjectList();
+      this.initSubjectModel();
     }, error => {
       this.messageService.showAlert({
         message: 'Something went wrong. Try again later',
@@ -81,11 +83,16 @@ export class TeachingAssignmentComponent implements OnInit {
     });
   }
 
+  initSubjectModel() {
+    this.selectedProf_ID = null;
+    this.subjectModel = {} as Subject;
+  }
+
   updateSubjectList() {
     this.subjectService.getAllByCourseOfStudy(this.selectedCourseOfStudy).subscribe(list => {
       this.subjectList = list;
     });
     this.subjectModel = {} as Subject;
-    this.selectedCOS_ID = null;
+    // this.selectedCOS_ID = null;
   }
 }
