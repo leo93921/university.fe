@@ -4,6 +4,8 @@ import { AcademicYear } from '../../../models/academic-year';
 import { CourseOfStudy } from '../../../models/course-of-study';
 import { CourseOfStudyService } from '../../../services/course-of-study.service';
 import { MessageService } from '../../../services/message.service';
+import { forkJoin } from '../../../../../node_modules/rxjs';
+import { take } from '../../../../../node_modules/rxjs/operators';
 
 @Component({
   selector: 'app-course-of-study',
@@ -20,6 +22,7 @@ export class CourseOfStudyComponent implements OnInit {
     id: null
   };
   selAY = null;
+  coursesOfStudy: CourseOfStudy[] = [];
 
   constructor(
     private academicYearService: AcademicYearService,
@@ -28,8 +31,16 @@ export class CourseOfStudyComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.academicYearService.getAcademicYears().subscribe(list => {
-      this.academicYears = list;
+    this.updateLists();
+  }
+
+  updateLists() {
+    forkJoin(
+      this.academicYearService.getAcademicYears(),
+      this.courseOfStudyService.getAll()
+    ).pipe(take(1)).subscribe(res => {
+      this.academicYears = res[0];
+      this.coursesOfStudy = res[1];
     });
   }
 
@@ -46,6 +57,7 @@ export class CourseOfStudyComponent implements OnInit {
   saveCourse() {
     this.courseOfStudyService.save(this.model).subscribe(saved => {
       this.messageService.showAlert({type: 'success', message: 'The course of study has been saved'});
+      this.updateLists();
     },
       error => {
         this.messageService.showAlert({type: 'danger', message: 'An error occurred, please retry.'});

@@ -22,7 +22,7 @@
             <div class="form-group">
                 <label for="academic-year">Academic year</label>
                 <select class="form-control" id="academic-year" name="academic-year" (change)="selectAcademicYear($event)" required [(ngModel)]="selAY">
-                  <option selected disabled [value]="null">Select an academic year</option>  
+                  <option selected disabled [value]="null">Select an academic year</option>
                   <option *ngFor="let ay of academicYears" [value]="ay.id">{{ ay.startYear }} - {{ ay.endYear }}</option>
                 </select>
             </div>
@@ -30,3 +30,28 @@
     </div>
     <button class="btn btn-primary" [disabled]="form.invalid" (click)="saveCourse()">Save</button>
 </form>
+
+<div class="mt-3">
+  <h3>Courses of study</h3>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Year</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cs of coursesOfStudy">
+        <th>{{ cs.id }}</th>
+        <td>{{ cs.name }}</td>
+        <td>{{ cs.academicYear.startYear }} - {{ cs.academicYear.endYear }}</td>
+      </tr>
+      <tr *ngIf="coursesOfStudy.length === 0">
+        <td colspan="5" class="text-center">
+          <small>No course of study present yet.</small>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
