@@ -74,7 +74,7 @@ export class ClassroomsComponent implements OnInit {
     this.classroomService.deleteClassroom(classroom).pipe(take(1)).subscribe(res => {
       this.messageService.showSuccess('The classroom has been deleted');
       this.updateList();
-    }, err => this.messageService.showDanger('Something went wrong. Try again.'));
+    }, err => this.messageService.showDanger('This classroom can\'t be deleted. It has lessons, exams or other entity linked to it.'));
   }
 
   selectClassroom(classroom: Classroom) {

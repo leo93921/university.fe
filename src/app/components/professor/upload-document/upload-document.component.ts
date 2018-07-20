@@ -51,9 +51,12 @@ export class UploadDocumentComponent implements OnInit {
 
     const filter = this.initFilter();
 
-    this.lessonService.filterLesson(filter).subscribe(list => {
+    this.lessonService.getBySubject(this.selectedSubject).subscribe(list => {
       this.lessons = list;
     });
+    /*this.lessonService.filterLesson(filter).subscribe(list => {
+      this.lessons = list;
+    });*/
   }
 
   openModal(modal, selectedLesson: Lesson) {
@@ -85,7 +88,7 @@ export class UploadDocumentComponent implements OnInit {
       this.messageType = 'success';
       this.alertToBeShown = true;
     }, error => {
-      this.showModalError();
+      this.showModalError('Something went wrong, try again later');
     });
   }
 
@@ -96,12 +99,12 @@ export class UploadDocumentComponent implements OnInit {
       this.alertToBeShown = true;
       this.documents.splice(index, 1);
     }, error => {
-      this.showModalError();
+      this.showModalError('This document cannot be deleted. It has evaluations or something else associated.');
     });
   }
 
-  showModalError() {
-    this.messageText = 'Something went wrong, try again later';
+  showModalError(message: string) {
+    this.messageText = message;
     this.messageType = 'danger';
     this.alertToBeShown = true;
   }
