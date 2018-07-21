@@ -75,7 +75,7 @@ export class UploadDocumentComponent implements OnInit {
     const formData = new FormData();
     formData.append('file', this.file, this.filename);
     formData.append('name', this.toUpload.name);
-    formData.append('note', this.toUpload.note);
+    formData.append('note', this.toUpload.note ? this.toUpload.note : '');
     formData.append('publishDate', (new Date()).toISOString());
     formData.append('lesson-id', this.selectedLesson.id.toString());
 
